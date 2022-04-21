@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B495080428102B140044809A /* JumpBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49507F428102B120044809A /* JumpBarApp.swift */; };
+		B495080528102B140044809A /* JumpBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49507F428102B120044809A /* JumpBarApp.swift */; };
+		B495080628102B140044809A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49507F528102B120044809A /* ContentView.swift */; };
+		B495080728102B140044809A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49507F528102B120044809A /* ContentView.swift */; };
+		B495080828102B140044809A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B49507F628102B140044809A /* Assets.xcassets */; };
+		B495080928102B140044809A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B49507F628102B140044809A /* Assets.xcassets */; };
+		B4C2D1692811F5A60056FA42 /* JumpBar in Frameworks */ = {isa = PBXBuildFile; productRef = B4C2D1682811F5A60056FA42 /* JumpBar */; };
+		B4C2D16B2811F5AA0056FA42 /* JumpBar in Frameworks */ = {isa = PBXBuildFile; productRef = B4C2D16A2811F5AA0056FA42 /* JumpBar */; };
+		B4C2D1732812B89F0056FA42 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C2D1722812B89F0056FA42 /* SecondView.swift */; };
+		B4C2D1742812B89F0056FA42 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C2D1722812B89F0056FA42 /* SecondView.swift */; };
+		B4C2D1762812C9CF0056FA42 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C2D1752812C9CF0056FA42 /* Routing.swift */; };
+		B4C2D1772812C9CF0056FA42 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C2D1752812C9CF0056FA42 /* Routing.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B49507F428102B120044809A /* JumpBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpBarApp.swift; sourceTree = "<group>"; };
+		B49507F528102B120044809A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B49507F628102B140044809A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B49507FB28102B140044809A /* JumpBarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpBarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B495080128102B140044809A /* JumpBarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpBarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B495080328102B140044809A /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		B495081528102CB90044809A /* JumpBar--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JumpBar--iOS--Info.plist"; sourceTree = "<group>"; };
+		B495081628102CD40044809A /* JumpBar--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JumpBar--macOS--Info.plist"; sourceTree = "<group>"; };
+		B4C2D1662811F56B0056FA42 /* JumpBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JumpBar; path = ..; sourceTree = "<group>"; };
+		B4C2D1722812B89F0056FA42 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		B4C2D1752812C9CF0056FA42 /* Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B49507F828102B140044809A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4C2D1692811F5A60056FA42 /* JumpBar in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49507FE28102B140044809A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4C2D16B2811F5AA0056FA42 /* JumpBar in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B49507EE28102B120044809A = {
+			isa = PBXGroup;
+			children = (
+				B4C2D1662811F56B0056FA42 /* JumpBar */,
+				B495081628102CD40044809A /* JumpBar--macOS--Info.plist */,
+				B495081528102CB90044809A /* JumpBar--iOS--Info.plist */,
+				B49507F328102B120044809A /* Shared */,
+				B495080228102B140044809A /* macOS */,
+				B49507FC28102B140044809A /* Products */,
+				B4C2D1672811F5A60056FA42 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B49507F328102B120044809A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B49507F428102B120044809A /* JumpBarApp.swift */,
+				B49507F528102B120044809A /* ContentView.swift */,
+				B4C2D1722812B89F0056FA42 /* SecondView.swift */,
+				B4C2D1752812C9CF0056FA42 /* Routing.swift */,
+				B49507F628102B140044809A /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B49507FC28102B140044809A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49507FB28102B140044809A /* JumpBarExample.app */,
+				B495080128102B140044809A /* JumpBarExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B495080228102B140044809A /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				B495080328102B140044809A /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		B4C2D1672811F5A60056FA42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B49507FA28102B140044809A /* JumpBar (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B495080C28102B140044809A /* Build configuration list for PBXNativeTarget "JumpBar (iOS)" */;
+			buildPhases = (
+				B49507F728102B140044809A /* Sources */,
+				B49507F828102B140044809A /* Frameworks */,
+				B49507F928102B140044809A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JumpBar (iOS)";
+			packageProductDependencies = (
+				B4C2D1682811F5A60056FA42 /* JumpBar */,
+			);
+			productName = "JumpBar (iOS)";
+			productReference = B49507FB28102B140044809A /* JumpBarExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B495080028102B140044809A /* JumpBar (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B495080F28102B140044809A /* Build configuration list for PBXNativeTarget "JumpBar (macOS)" */;
+			buildPhases = (
+				B49507FD28102B140044809A /* Sources */,
+				B49507FE28102B140044809A /* Frameworks */,
+				B49507FF28102B140044809A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JumpBar (macOS)";
+			packageProductDependencies = (
+				B4C2D16A2811F5AA0056FA42 /* JumpBar */,
+			);
+			productName = "JumpBar (macOS)";
+			productReference = B495080128102B140044809A /* JumpBarExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B49507EF28102B120044809A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					B49507FA28102B140044809A = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					B495080028102B140044809A = {
+						CreatedOnToolsVersion = 13.3;
+					};
+				};
+			};
+			buildConfigurationList = B49507F228102B120044809A /* Build configuration list for PBXProject "JumpBar" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B49507EE28102B120044809A;
+			productRefGroup = B49507FC28102B140044809A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B49507FA28102B140044809A /* JumpBar (iOS) */,
+				B495080028102B140044809A /* JumpBar (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B49507F928102B140044809A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B495080828102B140044809A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49507FF28102B140044809A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B495080928102B140044809A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B49507F728102B140044809A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4C2D1762812C9CF0056FA42 /* Routing.swift in Sources */,
+				B4C2D1732812B89F0056FA42 /* SecondView.swift in Sources */,
+				B495080628102B140044809A /* ContentView.swift in Sources */,
+				B495080428102B140044809A /* JumpBarApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B49507FD28102B140044809A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4C2D1772812C9CF0056FA42 /* Routing.swift in Sources */,
+				B4C2D1742812B89F0056FA42 /* SecondView.swift in Sources */,
+				B495080728102B140044809A /* ContentView.swift in Sources */,
+				B495080528102B140044809A /* JumpBarApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B495080A28102B140044809A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B495080B28102B140044809A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		B495080D28102B140044809A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JumpBar--iOS--Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.oanhof.JumpBar;
+				PRODUCT_NAME = JumpBarExample;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B495080E28102B140044809A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JumpBar--iOS--Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.oanhof.JumpBar;
+				PRODUCT_NAME = JumpBarExample;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B495081028102B140044809A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JumpBar--macOS--Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.oanhof.JumpBar;
+				PRODUCT_NAME = JumpBarExample;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B495081128102B140044809A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JumpBar--macOS--Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.oanhof.JumpBar;
+				PRODUCT_NAME = JumpBarExample;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B49507F228102B120044809A /* Build configuration list for PBXProject "JumpBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B495080A28102B140044809A /* Debug */,
+				B495080B28102B140044809A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B495080C28102B140044809A /* Build configuration list for PBXNativeTarget "JumpBar (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B495080D28102B140044809A /* Debug */,
+				B495080E28102B140044809A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B495080F28102B140044809A /* Build configuration list for PBXNativeTarget "JumpBar (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B495081028102B140044809A /* Debug */,
+				B495081128102B140044809A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B4C2D1682811F5A60056FA42 /* JumpBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JumpBar;
+		};
+		B4C2D16A2811F5AA0056FA42 /* JumpBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JumpBar;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B49507EF28102B120044809A /* Project object */;
+}
