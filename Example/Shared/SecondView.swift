@@ -45,7 +45,9 @@ struct SecondView: View {
                 break
             }
             
-            return DeepLinkInfo(pathComponents: Array(info.pathComponents.dropFirst(2)), queryItems: info.queryItems)
+            var info = info
+            info.pathComponents.removeFirst(2)
+            return info
         }
     }
 }

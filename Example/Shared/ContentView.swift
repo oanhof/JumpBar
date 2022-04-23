@@ -33,13 +33,16 @@ struct ContentView: View {
             .tag(2)
         }
         .route(debugName: "ContentView") { info in
-            guard info.pathComponents.count > 1,
-                  info.pathComponents[0] == "tab",
-                  let tab = Int(info.pathComponents[1]) else { return info }
+            var info = info
             
-            selectedTab = tab
-            
-            return DeepLinkInfo(pathComponents: Array(info.pathComponents.dropFirst(2)), queryItems: info.queryItems)
+            if info.pathComponents.count > 1,
+               info.pathComponents[0] == "tab",
+               let tab = Int(info.pathComponents[1]) {
+                selectedTab = tab
+                info.pathComponents.removeFirst(2)
+            }
+
+            return info
         }
     }
 }
