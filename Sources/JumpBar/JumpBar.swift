@@ -8,19 +8,42 @@
 import SwiftUI
 
 public struct JumpBarSuggestion: Identifiable, Hashable {
-    public var title: String
     public var url: URL
+    public var view: any View
     
     public var id: URL { url }
     
-    public init(title: String, url: URL) {
-        self.title = title
+    public init(url: URL, @ViewBuilder view: () -> any View) {
         self.url = url
+        self.view = view()
+    }
+    
+    public init(title: String, url: URL) {
+        self.init(url: url) {
+            Text(title)
+        }
+    }
+    
+    public static func == (lhs: JumpBarSuggestion, rhs: JumpBarSuggestion) -> Bool {
+        lhs.url == rhs.url
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
     }
 }
 
 public protocol JumpBarProvider {
     func suggestions(for text: String) async -> [JumpBarSuggestion]
+}
+
+public protocol AdvancedJumpBarProvider: ObservableObject {
+    
+    /// Should be declared as @Published
+    @MainActor
+    var suggestions: [JumpBarSuggestion] { get }
+    
+    func updateQuery(_ query: String) async
 }
 
 struct JumpBar<Content: View>: View {
@@ -51,96 +74,108 @@ struct JumpBar<Content: View>: View {
     }
     
     var body: some View {
-        ZStack {
-            content
-                .zIndex(1)
-            
-            if barShown {
-                Rectangle()
-                    .fill(.black.opacity(0.1))
-                    .ignoresSafeArea()
-                    .zIndex(2)
-                    .onTapGesture {
-                        barShown = false
-                    }
-                
-                VStack {
-                    JumpBarField(placeholder: "Jump to...", text: $text, onArrowUp: {
-                        guard let focused = focusedSuggestion,
-                                let idx = suggestions.firstIndex(of: focused),
-                                idx - 1 >= 0 else { return }
+        content
+            .overlay {
+                if barShown {
+                    ZStack {
+                        Rectangle()
+                            .fill(.black.opacity(0.1))
+                            .ignoresSafeArea()
+                            .zIndex(2)
+                            .onTapGesture {
+                                barShown = false
+                            }
                         
-                        focusedSuggestion = suggestions[idx - 1]
-                    }, onArrowDown: {
-                        guard let focused = focusedSuggestion,
-                                let idx = suggestions.firstIndex(of: focused),
-                                suggestions.count > idx + 1 else { return }
-                        
-                        focusedSuggestion = suggestions[idx + 1]
-                    }, onSubmit: {
-                        if let suggestion = focusedSuggestion {
-                            trigger(suggestion: suggestion)
-                        }
-                    })
-                    .focused($textFieldFocused)
-                    .padding()
-                    .background(.thinMaterial)
-                    .cornerRadius(12)
-                    .shadow(radius: 10)
-                    .padding(.horizontal)
-                    .offset(y: suggestions.isEmpty ? -50 : 0)
-                    
-                    if !suggestions.isEmpty {
-                        ScrollView {
-                            VStack(spacing: 0) {
-                                ForEach(suggestions) { suggestion in
-                                    Button {
-                                        trigger(suggestion: suggestion)
-                                    } label: {
-                                        Text(suggestion.title)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.horizontal)
-                                            .padding(.vertical, 5)
-                                            .contentShape(Rectangle())
-                                    }
-                                    .buttonStyle(.plain)
-                                    .padding(.vertical, 8)
-                                    .background {
-                                        if focusedSuggestion == suggestion {
-                                            Color.gray.opacity(0.4)
+                        VStack {
+                            JumpBarField(placeholder: "Jump to...", text: $text, onArrowUp: {
+                                guard let focused = focusedSuggestion,
+                                        let idx = suggestions.firstIndex(of: focused),
+                                        idx - 1 >= 0 else { return }
+                                
+                                focusedSuggestion = suggestions[idx - 1]
+                            }, onArrowDown: {
+                                guard let focused = focusedSuggestion,
+                                        let idx = suggestions.firstIndex(of: focused),
+                                        suggestions.count > idx + 1 else { return }
+                                
+                                focusedSuggestion = suggestions[idx + 1]
+                            }, onSubmit: {
+                                if let suggestion = focusedSuggestion {
+                                    trigger(suggestion: suggestion)
+                                }
+                            })
+                            .focused($textFieldFocused)
+                            .padding()
+                            .background(.thinMaterial)
+                            .cornerRadius(12)
+                            .shadow(radius: 10)
+                            .padding(.horizontal)
+                            .offset(y: suggestions.isEmpty ? -50 : 0)
+                            
+                            if !suggestions.isEmpty {
+                                ScrollView {
+                                    ScrollViewReader { proxy in
+                                        VStack(spacing: 0) {
+                                            ForEach(suggestions) { suggestion in
+                                                Button {
+                                                    trigger(suggestion: suggestion)
+                                                } label: {
+                                                    AnyView(suggestion.view)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.horizontal)
+                                                        .padding(.vertical, 5)
+                                                        .contentShape(Rectangle())
+                                                }
+                                                .buttonStyle(.plain)
+                                                .padding(.vertical, 8)
+                                                .id(suggestion)
+                                                .background {
+                                                    if focusedSuggestion == suggestion {
+                                                        Color.gray.opacity(0.4)
+                                                    }
+                                                }
+                                                
+                                                Divider()
+                                            }
+                                        }
+                                        .padding(.vertical, 4)
+                                        .onChange(of: focusedSuggestion) { newValue in
+                                            proxy.scrollTo(newValue)
                                         }
                                     }
-                                    
-                                    Divider()
                                 }
+                                .background(.thinMaterial)
+                                .frame(maxHeight: 500)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .cornerRadius(12)
+                                .shadow(radius: 10)
+                                .padding()
                             }
-                            .padding(.vertical, 4)
                         }
-                        .background(.thinMaterial)
-                        .frame(maxHeight: 500)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .cornerRadius(12)
-                        .shadow(radius: 10)
-                        .padding()
+                        .frame(maxWidth: 600)
+                        .zIndex(3)
+                        .task(id: text) {
+                            do {
+                                try await Task.sleep(nanoseconds: UInt64(Double(NSEC_PER_SEC) * 0.5))
+                                
+                                suggestions = await provider.suggestions(for: text)
+                                focusedSuggestion = suggestions.first
+                            } catch {
+                                print(error)
+                            }
+                        }
                     }
                 }
-                .frame(maxWidth: 600)
-                .zIndex(3)
-                .task(id: text) {
-                    suggestions = await provider.suggestions(for: text)
-                    focusedSuggestion = suggestions.first
+            }
+            .keyboardShortcut("k", modifiers: .command) {
+                barShown.toggle()
+                
+                if barShown == true {
+                    textFieldFocused = true
                 }
             }
-        }
-        .keyboardShortcut("k", modifiers: .command) {
-            barShown.toggle()
-            
-            if barShown == true {
-                textFieldFocused = true
-            }
-        }
-        .animation(.default, value: barShown)
-        .animation(.default, value: suggestions)
+            .animation(.default, value: barShown)
+            .animation(.default, value: suggestions)
     }
     
     func trigger(suggestion: JumpBarSuggestion) {
@@ -225,10 +260,24 @@ struct JumpBarField: View {
 
 #if canImport(UIKit)
 
-class CustomTextField: UITextField {
+class CustomTextField: UITextField, UITextFieldDelegate {
     var onArrowUp: (() -> Void)?
     var onArrowDown: (() -> Void)?
     var onSubmit: (() -> Void)?
+    
+    init(onArrowUp: (() -> Void)? = nil, onArrowDown: (() -> Void)? = nil, onSubmit: (() -> Void)? = nil) {
+        self.onArrowUp = onArrowUp
+        self.onArrowDown = onArrowDown
+        self.onSubmit = onSubmit
+        
+        super.init(frame: .zero)
+        
+        delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         switch presses.first?.key?.keyCode {
@@ -236,11 +285,16 @@ class CustomTextField: UITextField {
             onArrowUp?()
         case .keyboardDownArrow:
             onArrowDown?()
-        case .keyboardReturnOrEnter:
-            onSubmit?()
+//        case .keyboardReturnOrEnter:
+//            onSubmit?()
         default:
             super.pressesBegan(presses, with: event)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        onSubmit?()
+        return false
     }
 }
 
