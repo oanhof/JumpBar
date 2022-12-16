@@ -9,13 +9,13 @@ import SwiftUI
 
 public struct JumpBarSuggestion: Identifiable, Hashable {
     public var url: URL
-    public var view: any View
+    public var view: AnyView
     
     public var id: URL { url }
     
     public init(url: URL, @ViewBuilder view: () -> any View) {
         self.url = url
-        self.view = view()
+        self.view = AnyView(view())
     }
     
     public init(title: String, url: URL) {
@@ -33,20 +33,15 @@ public struct JumpBarSuggestion: Identifiable, Hashable {
     }
 }
 
-public protocol JumpBarProvider {
-    func suggestions(for text: String) async -> [JumpBarSuggestion]
-}
-
-public protocol AdvancedJumpBarProvider: ObservableObject {
-    
-    /// Should be declared as @Published
-    @MainActor
+@MainActor
+public protocol JumpBarProvider: ObservableObject {
+    /// should be declared as @Published
     var suggestions: [JumpBarSuggestion] { get }
     
-    func updateQuery(_ query: String) async
+    func update(query: String) async
 }
 
-struct JumpBar<Content: View>: View {
+struct JumpBar<Content: View, Provider: JumpBarProvider>: View {
     @State
     private var barShown = false
     
@@ -57,20 +52,19 @@ struct JumpBar<Content: View>: View {
     private var textFieldFocused: Bool
     
     @State
-    private var suggestions: [JumpBarSuggestion] = []
-    
-    @State
     private var focusedSuggestion: JumpBarSuggestion?
     
     @Environment(\.openURL)
     private var openURL
     
     private let content: Content
-    private let provider: JumpBarProvider
     
-    init(provider: JumpBarProvider, @ViewBuilder _ content: () -> Content) {
+    @StateObject
+    private var provider: Provider
+    
+    init(provider: Provider, @ViewBuilder _ content: () -> Content) {
         self.content = content()
-        self.provider = provider
+        self._provider = StateObject(wrappedValue: provider)
     }
     
     var body: some View {
@@ -89,16 +83,16 @@ struct JumpBar<Content: View>: View {
                         VStack {
                             JumpBarField(placeholder: "Jump to...", text: $text, onArrowUp: {
                                 guard let focused = focusedSuggestion,
-                                        let idx = suggestions.firstIndex(of: focused),
+                                      let idx = provider.suggestions.firstIndex(of: focused),
                                         idx - 1 >= 0 else { return }
                                 
-                                focusedSuggestion = suggestions[idx - 1]
+                                focusedSuggestion = provider.suggestions[idx - 1]
                             }, onArrowDown: {
                                 guard let focused = focusedSuggestion,
-                                        let idx = suggestions.firstIndex(of: focused),
-                                        suggestions.count > idx + 1 else { return }
+                                      let idx = provider.suggestions.firstIndex(of: focused),
+                                      provider.suggestions.count > idx + 1 else { return }
                                 
-                                focusedSuggestion = suggestions[idx + 1]
+                                focusedSuggestion = provider.suggestions[idx + 1]
                             }, onSubmit: {
                                 if let suggestion = focusedSuggestion {
                                     trigger(suggestion: suggestion)
@@ -110,13 +104,13 @@ struct JumpBar<Content: View>: View {
                             .cornerRadius(12)
                             .shadow(radius: 10)
                             .padding(.horizontal)
-                            .offset(y: suggestions.isEmpty ? -50 : 0)
+                            .offset(y: provider.suggestions.isEmpty ? -50 : 0)
                             
-                            if !suggestions.isEmpty {
+                            if !provider.suggestions.isEmpty {
                                 ScrollView {
                                     ScrollViewReader { proxy in
                                         VStack(spacing: 0) {
-                                            ForEach(suggestions) { suggestion in
+                                            ForEach(provider.suggestions) { suggestion in
                                                 Button {
                                                     trigger(suggestion: suggestion)
                                                 } label: {
@@ -155,14 +149,14 @@ struct JumpBar<Content: View>: View {
                         .frame(maxWidth: 600)
                         .zIndex(3)
                         .task(id: text) {
-                            do {
-                                try await Task.sleep(nanoseconds: UInt64(Double(NSEC_PER_SEC) * 0.5))
-                                
-                                suggestions = await provider.suggestions(for: text)
-                                focusedSuggestion = suggestions.first
-                            } catch {
-                                print(error)
-                            }
+                            await provider.update(query: text)
+                        }
+                    }
+                    .onChange(of: provider.suggestions) { newValue in
+                        if focusedSuggestion == nil {
+                            focusedSuggestion = newValue.first
+                        } else if let focusedSuggestion, !newValue.contains(focusedSuggestion) {
+                            self.focusedSuggestion = newValue.first
                         }
                     }
                 }
@@ -175,7 +169,7 @@ struct JumpBar<Content: View>: View {
                 }
             }
             .animation(.default, value: barShown)
-            .animation(.default, value: suggestions)
+            .animation(.default, value: provider.suggestions)
     }
     
     func trigger(suggestion: JumpBarSuggestion) {
@@ -192,8 +186,8 @@ struct JumpBar_Previews: PreviewProvider {
     }
 }
 
-struct JumpBarModifier: ViewModifier {
-    let provider: JumpBarProvider
+struct JumpBarModifier<Provider: JumpBarProvider>: ViewModifier {
+    let provider: Provider
     
     func body(content: Content) -> some View {
         JumpBar(provider: provider) {
@@ -203,14 +197,17 @@ struct JumpBarModifier: ViewModifier {
 }
 
 extension View {
-    public func jumpBar(provider: JumpBarProvider) -> some View {
+    public func jumpBar<Provider: JumpBarProvider>(provider: Provider) -> some View {
         modifier(JumpBarModifier(provider: provider))
     }
 }
 
-private struct MockJumpBarProvider: JumpBarProvider {
-    func suggestions(for text: String) async -> [JumpBarSuggestion] {
-        [
+private class MockJumpBarProvider: JumpBarProvider {
+    @Published
+    var suggestions = [JumpBarSuggestion]()
+    
+    func update(query: String) async {
+        suggestions = [
             JumpBarSuggestion(title: "Suggestion 1", url: URL(string: "jumpbar://suggestion1")!),
             JumpBarSuggestion(title: "Suggestion 2", url: URL(string: "jumpbar://suggestion2")!)
         ]
